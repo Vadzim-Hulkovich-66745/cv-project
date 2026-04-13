@@ -85,3 +85,80 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* FORM */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, textarea {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+/* ===== FORM CONTAINER ===== */
+form {
+    max-width: 500px;          /* ограничиваем ширину */
+    margin: 0 auto;            /* центрируем */
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* LABEL */
+form label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* INPUTS */
+input, textarea {
+    width: 100%;               /* ровно внутри формы */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;    /* чтобы не вылезали */
+}
+
+/* TEXTAREA */
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* BUTTON */
+form button {
+    margin-top: 15px;
+    align-self: center;        /* кнопка по центру */
+    width: 50%;
+}
+
+/* ERRORS */
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+/* SECTION TITLE ALIGN */
+section h2 {
+    text-align: center;
+}
