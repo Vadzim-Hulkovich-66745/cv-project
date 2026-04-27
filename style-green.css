@@ -162,3 +162,20 @@ form button {
 section h2 {
     text-align: center;
 }
+
+/* ADD PROJECT */
+.add-project {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.add-project input {
+    flex: 1;
+}
+
+#projectsList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
