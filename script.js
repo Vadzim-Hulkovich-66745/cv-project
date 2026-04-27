@@ -1,13 +1,9 @@
-// Номер индекса в коде (ТРЕБОВАНИЕ)
 console.log("Vadzim Hulkovich 66745");
 
-// элементы
+// ===== THEME =====
 const themeBtn = document.getElementById("themeBtn");
-const toggleSkillsBtn = document.getElementById("toggleSkillsBtn");
 const theme = document.getElementById("theme");
-const skills = document.getElementById("skills");
 
-// переключение темы
 themeBtn.addEventListener("click", () => {
     if (theme.getAttribute("href") === "style-green.css") {
         theme.setAttribute("href", "style-red.css");
@@ -16,35 +12,76 @@ themeBtn.addEventListener("click", () => {
     }
 });
 
-// скрытие / показ
+// ===== SKILLS TOGGLE =====
+const toggleSkillsBtn = document.getElementById("toggleSkillsBtn");
+const skillsSection = document.getElementById("skills");
+
 toggleSkillsBtn.addEventListener("click", () => {
-    if (skills.style.display === "none") {
-        skills.style.display = "block";
-    } else {
-        skills.style.display = "none";
-    }
+    skillsSection.style.display =
+        skillsSection.style.display === "none" ? "block" : "none";
 });
 
-// ===== ZADANIE 5 - WALIDACJA =====
+// ===== FETCH JSON =====
+fetch("data.json")
+    .then(response => response.json())
+    .then(data => {
+
+        // BASIC INFO
+        document.getElementById("name").textContent = data.name;
+        document.getElementById("position").textContent = data.position;
+        document.getElementById("about").textContent = data.about;
+
+        // CONTACT
+        const emailLink = document.getElementById("emailLink");
+        emailLink.textContent = data.email;
+        emailLink.href = "mailto:" + data.email;
+
+        const phoneLink = document.getElementById("phoneLink");
+        phoneLink.textContent = data.phone;
+        phoneLink.href = "tel:" + data.phone;
+
+        document.getElementById("city").textContent = data.city;
+
+        // FOOTER
+        document.getElementById("footer").textContent = data.name;
+
+        // ===== SKILLS LIST =====
+        const skillsList = document.getElementById("skillsList");
+
+        data.skills.forEach(skill => {
+            const li = document.createElement("li");
+            li.textContent = skill;
+            skillsList.appendChild(li);
+        });
+
+        // ===== PROJECTS LIST =====
+        const projectsList = document.getElementById("projectsList");
+
+        data.projects.forEach(project => {
+            const li = document.createElement("li");
+            li.textContent = project;
+            projectsList.appendChild(li);
+        });
+
+    });
+
+// ===== VALIDATION =====
 
 const form = document.getElementById("contactForm");
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // поля
     const firstName = document.getElementById("firstName").value.trim();
     const lastName = document.getElementById("lastName").value.trim();
     const email = document.getElementById("email").value.trim();
     const message = document.getElementById("message").value.trim();
 
-    // ошибки (div)
     const firstNameError = document.getElementById("firstNameError");
     const lastNameError = document.getElementById("lastNameError");
     const emailError = document.getElementById("emailError");
     const messageError = document.getElementById("messageError");
 
-    // очистка
     firstNameError.textContent = "";
     lastNameError.textContent = "";
     emailError.textContent = "";
@@ -52,7 +89,6 @@ form.addEventListener("submit", function (e) {
 
     let isValid = true;
 
-    // === WALIDACJA IMIĘ ===
     if (firstName === "") {
         firstNameError.textContent = "Imię jest wymagane";
         isValid = false;
@@ -61,7 +97,6 @@ form.addEventListener("submit", function (e) {
         isValid = false;
     }
 
-    // === NAZWISKO ===
     if (lastName === "") {
         lastNameError.textContent = "Nazwisko jest wymagane";
         isValid = false;
@@ -70,7 +105,6 @@ form.addEventListener("submit", function (e) {
         isValid = false;
     }
 
-    // === EMAIL ===
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (email === "") {
@@ -81,13 +115,11 @@ form.addEventListener("submit", function (e) {
         isValid = false;
     }
 
-    // === MESSAGE ===
     if (message === "") {
         messageError.textContent = "Wiadomość jest wymagana";
         isValid = false;
     }
 
-    // SUCCESS
     if (isValid) {
         alert("Formularz wysłany poprawnie!");
         form.reset();
